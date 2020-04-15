@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>title</title>
+  <meta name="author" content="name">
+  <meta name="description" content="description here">
+  <meta name="keywords" content="keywords,here">
+  <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class='header__inner'>
+        <h1>Covid-19 data</h1>
+        <button onclick="exportTableToCSV(null,'test.csv')">Download as csv</button>
+      </div>
+    </header>
+    <table id='covidTable'>
+      <tbody>
+        <tr id='heading'>
+          <th>Country</th>
+          <th>Total Confirmed</th>
+          <th>Total Deaths</th>
+          <th>Total Recovered</th>
+        </tr>
+      </tbody>
+    </table>
+    <table id='root'>
+    </table>
+  </body>
+  <script src='app.js'></script>
+</html>
