@@ -33,41 +33,40 @@ const loadPage = () => {
             root.appendChild(tr)
         }
     })
+}
 
+function exportTableToCSV(html, filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
 
-    function exportTableToCSV(html, filename) {
-        var csv = [];
-        var rows = document.querySelectorAll("table tr");
-
-        for(let i = 0; i < rows.length; i++){
-            var row = [], cols = rows[i].querySelectorAll("td, th");
-            for(var j = 0; j < cols.length; j++){
-                row.push(String(cols[j].innerText).replace(",",""));
-            }
-            csv.push(row.join(","));
+    for(let i = 0; i < rows.length; i++){
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        for(var j = 0; j < cols.length; j++){
+            row.push(String(cols[j].innerText).replace(",",""));
         }
-
-        // download csv file
-        downloadCSV(csv.join("\n"), filename);
+        csv.push(row.join(","));
     }
 
-    function downloadCSV(csv, filename) {
-        var csvFile;
-        var downloadLink;
+    // download csv file
+    downloadCSV(csv.join("\n"), filename);
+}
 
-        if (window.Blob == undefined || window.URL == undefined || window.URL.createObjectURL == undefined) {
-            alert("Your browser doesn't support Blobs");
-            return;
-        }
-        
-        csvFile = new Blob([csv], {type:"text/csv"});
-        downloadLink = document.createElement("a");
-        downloadLink.download = filename;
-        downloadLink.href = window.URL.createObjectURL(csvFile);
-        downloadLink.style.display = "none";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    if (window.Blob == undefined || window.URL == undefined || window.URL.createObjectURL == undefined) {
+        alert("Your browser doesn't support Blobs");
+        return;
     }
+    
+    csvFile = new Blob([csv], {type:"text/csv"});
+    downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
 }
 
 loadPage();
